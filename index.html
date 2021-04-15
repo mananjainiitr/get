@@ -23,19 +23,22 @@
     <body>
     <script>
         var myArray = [];
-        $.ajax({
-            method:'GET',
-            url:'https://reqres.in/api/users',
-            success:function(response){
-                myArray = response.data
-                console.log(myArray)
-                console.log("hii")
-                table(myArray)
-            }
-         
-        })
 
-        function table(data)
+        var xhttp = new XMLHttpRequest();
+        var obj ;
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                console.log(this.response);
+                obj = JSON.parse(this.response);
+                table(obj.data);
+                console.log(obj);
+
+                }
+            };
+            xhttp.open("GET", "https://reqres.in/api/users", true);
+            xhttp.send();
+
+         function table(data)
         {
             var table = document.getElementById("table");
             for(var i = 0 ; i <data.length ; i++ )
