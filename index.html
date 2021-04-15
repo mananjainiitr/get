@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <style>
+            body{
+                background-color: rgb(17, 247, 235)
+            }
+            #table{
+                
+                width:100vw;
+            }
+            tr{
+                background-color: rgb(253, 251, 145);
+            }
+            #heading{
+                background-color: white;
+                height : 50px;
+            }
+            
+        </style>
+    </head>
+    <body>
+    <script>
+        var myArray = [];
+        $.ajax({
+            method:'GET',
+            url:'https://reqres.in/api/users',
+            success:function(response){
+                myArray = response.data
+                console.log(myArray)
+                console.log("hii")
+                table(myArray)
+            }
+         
+        })
+
+        function table(data)
+        {
+            var table = document.getElementById("table");
+            for(var i = 0 ; i <data.length ; i++ )
+            {
+                
+                var row = '<tr><th>'+data[i].id+'</th><th>'+data[i].first_name+'</th><th>'+data[i].last_name+'</th><th>'+data[i].email+'</th><th> <img src ='+data[i].avatar+' img ></th></tr';
+                table.innerHTML += row ;
+            }
+
+        }
+    </script>
+
+             <h1>Avatar</h1>
+             <table id="table">
+                 <tr id = heading>
+                     <th>ID</th>
+                     <th>First Name</th>
+                     <th>Last Name</th>
+                     
+                     <th>Email</th>
+                     <th>Avtar</th>
+
+                 </tr>
+
+             </table>
+    </body>
+</html>
